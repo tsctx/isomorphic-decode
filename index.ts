@@ -7,8 +7,9 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
   //    as the values of input’s bytes, in the same order.
   const length = input.length;
   if ("byteLength" in input && input.length > 128) {
-    let result = "";
     let addition = (2 << 15) - 1;
+    if (addition > length) return String.fromCharCode.apply(null, input);
+    let result = "";
     for (let i = 0; i < length; i += addition) {
       if (i + addition > length) {
         addition = length - i;
@@ -20,6 +21,7 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
     }
     return result;
   }
+  if ((2 << 15) - 1 > length) return String.fromCharCode.apply(null, input);
   let result = "",
     i = 0;
   while (i < length) {
