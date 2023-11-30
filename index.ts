@@ -7,22 +7,21 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
   //    as the values of input’s bytes, in the same order.
   const length = input.length;
   if ((2 << 15) - 1 > length) return String.fromCharCode.apply(null, input);
+  let result = ""
+  let i = 0;
   if ("buffer" in input) {
     let addition = (2 << 15) - 1;
-    let result = "";
-    for (let i = 0; i < length; i += addition) {
+    while (i < length) {
       if (i + addition > length) {
         addition = length - i;
       }
       result += String.fromCharCode.apply(
         null,
-        input.subarray(i, i + addition) as unknown as number[],
+        input.subarray(i, i += addition) as unknown as number[],
       );
     }
     return result;
   }
-  let result = "",
-    i = 0;
   while (i + 32 < length) {
     result += String.fromCharCode(
       input[i],
