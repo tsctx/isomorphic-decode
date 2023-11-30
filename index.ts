@@ -23,7 +23,7 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
   }
   let result = "",
     i = 0;
-  while (i + 16 < length) {
+  while (i + 32 < length) {
     result += String.fromCharCode(
       input[i],
       input[i + 1],
@@ -41,8 +41,24 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
       input[i + 13],
       input[i + 14],
       input[i + 15],
+      input[i + 16],
+      input[i + 17],
+      input[i + 18],
+      input[i + 19],
+      input[i + 20],
+      input[i + 21],
+      input[i + 22],
+      input[i + 23],
+      input[i + 24],
+      input[i + 25],
+      input[i + 26],
+      input[i + 27],
+      input[i + 28],
+      input[i + 29],
+      input[i + 30],
+      input[i + 31],
     );
-    i += 16
+    i += 32;
   }
   while (i < length) result += String.fromCharCode(input[i++]);
   return result;
