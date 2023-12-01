@@ -59,6 +59,7 @@ export function isomorphicDecode(input: number[] | Uint8Array) {
     );
     i += 32;
   }
+  // Decode the remaining characters.
   while (i < length) result += String.fromCharCode(input[i++]);
   return result;
 }
